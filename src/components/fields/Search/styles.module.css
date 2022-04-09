@@ -1,0 +1,29 @@
+.root {
+  width: 100%
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.wrapper>input {
+  width: 23rem;
+  outline: none !important;
+  border: none;
+  padding: 1rem;
+  padding-right: 3rem;
+}
+
+.wrapper>input:focus {
+  outline: none !important;
+}
+
+.wrapper>span {
+  position: relative;
+  right: 2rem;
+  width: 0;
+  cursor: pointer;
+}

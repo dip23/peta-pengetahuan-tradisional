@@ -1,0 +1,35 @@
+.root {
+  width: max-content;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.root>div:first-child {
+  padding: 1rem;
+  background-color: var(--mid-grey);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--white);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.searchInput>div>input {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.resultBox {
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: var(--white);
+  margin-top: 1.5rem;
+}
+
+.resultBox>div {
+  display: flex;
+}
+
+.resultBox>div>span {
+  margin-right: 1rem;
+}
