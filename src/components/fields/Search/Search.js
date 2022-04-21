@@ -17,7 +17,7 @@ export default function Search(props) {
     <div className={classes}>
       {label && (<label>{label}</label>)}
       <div className={styles.wrapper}>
-        <input type="search" {...inputProps} />
+        <input type="text" {...inputProps} onKeyDown={handleSubmit} />
         <span onClick={handleSubmit}>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </span>

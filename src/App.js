@@ -1,6 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes } from 'react-router-dom';
-import { Route } from 'react-router';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import Admin from './pages/Admin';
 

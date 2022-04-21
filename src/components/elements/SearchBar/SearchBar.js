@@ -1,29 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import React, { useState } from 'react';
+import React from 'react';
 import Search from '../../fields/Search';
 import styles from './styles.module.css';
 
-export default function SearchBar() {
-  const [keyword, setKeyword] = useState('');
-  const [openResult, setOpenResult] = useState(false);
-
-  const handleInput = (e) => {
-    setTimeout(() => {
-      setKeyword(e.target.value)
-    }, 1500)
-  }
+export default function SearchBar(props) {
+  const {
+    onClickResult,
+    openResult,
+    handleInput,
+    handleSubmit,
+    resultData
+  } = props;
 
   const inputProps = {
     placeholder: 'Search..',
     onChange: handleInput
   }
-
-  const handleSubmit = () => {
-    setOpenResult(true);
-  }
-
-  console.log(openResult);
 
   return (
     <div className={styles.root}>
@@ -33,12 +26,20 @@ export default function SearchBar() {
         className={styles.searchInput}
         handleSubmit={handleSubmit}
       />
-      {keyword && (
+      {openResult && (
         <div className={styles.resultBox}>
-          <div>
-            <span><FontAwesomeIcon icon={faLocationDot} /></span>
-            <p>{keyword}</p>
-          </div>
+          {resultData.length !== 0 ? (
+            resultData.map((i, idx) => (
+              <div onClick={onClickResult} key={idx}>
+                <span><FontAwesomeIcon icon={faLocationDot} /></span>
+                <p>{i.name}</p>
+              </div>
+            ))
+          ) : (
+            <div>
+              <p>Pengetahuan Tradisional tidak ditemukan!</p>
+            </div>
+          )}
         </div>
       )}
     </div>
