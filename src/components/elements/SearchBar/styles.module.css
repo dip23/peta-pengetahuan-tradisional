@@ -1,5 +1,5 @@
 .root {
-  width: max-content;
+  width: 23rem;
   margin-left: 1rem;
   margin-top: 1rem;
 }
@@ -14,20 +14,37 @@
   border-top-right-radius: 5px;
 }
 
-.searchInput>div>input {
+.searchInput>form>input {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
 .resultBox {
-  padding: 1rem;
-  border-radius: 5px;
-  background-color: var(--white);
   margin-top: 1.5rem;
+  overflow: auto;
+  height: 20rem;
 }
 
 .resultBox>div {
+  background-color: var(--white);
   display: flex;
+  padding: 1rem;
+  cursor: pointer;
+  max-width: 23rem;
+}
+
+.resultBox>div:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.resultBox>div:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.resultBox>div:hover {
+  background-color: var(--hover-grey);
 }
 
 .resultBox>div>span {

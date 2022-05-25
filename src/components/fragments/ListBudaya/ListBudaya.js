@@ -6,18 +6,22 @@ import styles from './styles.module.css';
 export default function ListBudaya(props) {
   const {
     name,
-    onClose
+    onClose,
+    data,
+    handleClickBudaya
   } = props;
 
   return (
-    <div className={styles.root}>
+    <section className={styles.root}>
       <div className={styles.header}>
         <p>Provinsi {name}</p>
         <FontAwesomeIcon className={styles.close} icon={faClose} onClick={onClose} />
       </div>
-      <div>
-        List Budaya
+      <div className={styles.list}>
+        {data && data.map((i, idx) => (
+          <div key={idx} onClick={() => handleClickBudaya(i.id)}>{i.nama_budaya}</div>
+        ))}
       </div>
-    </div>
+    </section>
   )
 }

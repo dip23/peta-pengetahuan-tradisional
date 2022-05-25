@@ -15,15 +15,23 @@
   border: none;
   padding: 1rem;
   padding-right: 3rem;
+  font-size: 0.875rem;
 }
 
 .wrapper>input:focus {
   outline: none !important;
 }
 
-.wrapper>span {
+.wrapper>button {
   position: relative;
   right: 2rem;
   width: 0;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.wrapper>button>svg {
+  width: 1rem;
+  height: 1rem;
 }

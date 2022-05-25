@@ -48,14 +48,14 @@ export default function Maps(props) {
             position={[i.latitude, i.longitude]}
             eventHandlers={{
               click: () => {
-                handleClick(i.name)
+                handleClick(i.id, i.nama_provinsi)
               },
             }}
           />
         ))}
         <GeoJSON
           style={countryStyle}
-          data={geoJson.features}
+          data={geoJson}
           onEachFeature={onEachProvince}
         />
         <ZoomControl position='topright' />

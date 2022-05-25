@@ -16,12 +16,12 @@ export default function Search(props) {
   return (
     <div className={classes}>
       {label && (<label>{label}</label>)}
-      <div className={styles.wrapper}>
-        <input type="text" {...inputProps} onKeyDown={handleSubmit} />
-        <span onClick={handleSubmit}>
+      <form className={styles.wrapper} onSubmit={handleSubmit}>
+        <input type="text" {...inputProps} />
+        <button type="submit">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </span>
-      </div>
+        </button>
+      </form>
     </div>
   )
 }

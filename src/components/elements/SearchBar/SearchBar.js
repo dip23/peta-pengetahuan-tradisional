@@ -30,9 +30,9 @@ export default function SearchBar(props) {
         <div className={styles.resultBox}>
           {resultData.length !== 0 ? (
             resultData.map((i, idx) => (
-              <div onClick={onClickResult} key={idx}>
+              <div onClick={() => onClickResult(i.id)} key={idx}>
                 <span><FontAwesomeIcon icon={faLocationDot} /></span>
-                <p>{i.name}</p>
+                <p>{`${i.nama_budaya}, ${i.Provinsi.nama_provinsi}`}</p>
               </div>
             ))
           ) : (

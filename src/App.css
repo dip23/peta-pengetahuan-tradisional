@@ -21,6 +21,7 @@
   --sage: #ACA885;
   --wheat: #E1CA96;
   --white: #FFFFFF;
+  --hover-grey: #E4E4E4;
 
   font-size: calc(100vw * 16 / 1440);
 }
