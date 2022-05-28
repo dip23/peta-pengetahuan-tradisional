@@ -1,17 +1,22 @@
+import React, { Suspense } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
-import Admin from './pages/Admin';
+import { routes } from './configs/routes';
+
+const LandingPage = React.lazy(() => import('./pages/LandingPage'));
+const Admin = React.lazy(() => import('./pages/Admin'));
 
 function App() {
   return (
     <div>
-      <Router>
-        <Routes>
-          <Route element={<LandingPage />} exact path='/' />
-          <Route element={<Admin />} exact path='/admin' />
-        </Routes>
-      </Router>
+      <Suspense fallback={<div>Loading..</div>}>
+        <Router>
+          <Routes>
+            <Route element={<LandingPage />} exact path={routes.LANDING_PAGE()} />
+            <Route element={<Admin />} exact path={routes.ADMIN()} />
+          </Routes>
+        </Router>
+      </Suspense>
     </div>
   );
 }

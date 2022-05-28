@@ -1,7 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 export default function Search(props) {
   const {
@@ -24,4 +25,18 @@ export default function Search(props) {
       </form>
     </div>
   )
-}
+};
+
+Search.defaultProps = {
+  label: '',
+  inputProps: {},
+  className: '',
+  handleSubmit: () => { }
+};
+
+Search.propTypes = {
+  label: PropTypes.string,
+  inputProps: PropTypes.object,
+  className: PropTypes.string,
+  handleSubmit: PropTypes.func
+};

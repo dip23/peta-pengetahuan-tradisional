@@ -16,14 +16,14 @@ export default function Maps(props) {
   } = props;
 
   const countryStyle = {
-    fillOpacity: 1,
+    fillOpacity: 0.7,
     color: 'black',
     weight: 2
   };
 
   const onEachProvince = (province, layer) => {
-    let high = 53.68467496;
-    let low = 12.65818218;
+    let high = 48.5811082;
+    let low = 15.8188918;
     const totalBudaya = province.properties.totalBudaya;
 
     if (totalBudaya >= high) {

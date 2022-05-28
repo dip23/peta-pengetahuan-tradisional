@@ -1,8 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import Search from '../../fields/Search';
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 export default function SearchBar(props) {
   const {
@@ -45,3 +46,19 @@ export default function SearchBar(props) {
     </div>
   )
 }
+
+SearchBar.defaultProps = {
+  handleInput: () => { },
+  handleSubmit: () => { },
+  onClickResult: () => { },
+  openResult: false,
+  resultData: []
+};
+
+SearchBar.propTypes = {
+  handleInput: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  onClickResult: PropTypes.func,
+  openResult: PropTypes.bool,
+  resultData: PropTypes.array
+};
