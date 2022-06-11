@@ -18,14 +18,14 @@ export default function ListBudaya(props) {
   const navigate = useNavigate();
   const [listBudaya, setListBudaya] = useState([]);
 
-  const fetchListBudaya = async () => {
-    const res = await budayaAPI.getListBudaya(id);
-    setListBudaya(res.data.data);
-  };
 
   useEffect(() => {
+    const fetchListBudaya = async () => {
+      const res = await budayaAPI.getListBudaya(id);
+      setListBudaya(res.data.data);
+    };
     fetchListBudaya();
-  });
+  }, [id]);
 
   const onClose = () => {
     navigate(routes.LANDING_PAGE());

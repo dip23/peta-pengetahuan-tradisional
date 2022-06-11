@@ -24,7 +24,7 @@ export default function LandingPage() {
   const [dataBudaya, setDataBudaya] = useState([]);
 
   const fetchData = async () => {
-    const res = await provinceAPI.getProvinces();
+    const res = await provinceAPI.getAllDataProvinces();
     const resBudaya = await budayaAPI.getAllBudaya();
     setDataProvinsi(res.data.data);
     setDataBudaya(resBudaya.data.data);
@@ -35,7 +35,7 @@ export default function LandingPage() {
   }, [])
 
   const handleClickLocation = (id, name) => {
-    navigate(routes.LIST_BUDAYA(id));
+    navigate(routes.LIST_BUDAYA(id), { replace: false });
     setlocationName(name);
   };
 

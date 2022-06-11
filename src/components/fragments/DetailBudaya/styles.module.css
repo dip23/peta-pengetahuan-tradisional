@@ -51,6 +51,15 @@
   font-size: 1rem;
 }
 
+.title>div:first-child>p:last-child>span {
+  margin-left: 0.25rem;
+}
+
+.title>div:first-child>p:last-child>span:hover,
+.title>div:last-child:hover {
+  cursor: pointer;
+}
+
 .title>div:last-child {
   padding: 0.75rem;
   background-color: var(--mid-grey);

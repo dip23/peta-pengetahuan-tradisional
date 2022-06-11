@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 import {
   MapContainer,
@@ -6,7 +6,9 @@ import {
   Marker,
   ZoomControl,
   GeoJSON,
+  Tooltip,
 } from 'react-leaflet';
+import calculationAPI from '../../../api/calculationAPI';
 
 export default function Maps(props) {
   const {
@@ -15,6 +17,17 @@ export default function Maps(props) {
     handleClick
   } = props;
 
+  const [dataCalc, setDataCalc] = useState({});
+
+  const fetchData = async () => {
+    const res = await calculationAPI.getAllCalculate();
+    setDataCalc(res.data.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const countryStyle = {
     fillOpacity: 0.7,
     color: 'black',
@@ -22,16 +35,18 @@ export default function Maps(props) {
   };
 
   const onEachProvince = (province, layer) => {
-    let high = 48.5811082;
-    let low = 15.8188918;
-    const totalBudaya = province.properties.totalBudaya;
+    let high = dataCalc?.high;
+    let low = dataCalc?.low;
+    const totalBudaya = parseInt(data[province.index]?.totalBudaya) + 1;
 
-    if (totalBudaya >= high) {
-      layer.options.fillColor = '#73D737';
-    } else if (totalBudaya <= low) {
-      layer.options.fillColor = '#FB4141';
-    } else {
-      layer.options.fillColor = '#E1FB41';
+    if (!isNaN(totalBudaya)) {
+      if (totalBudaya >= high) {
+        layer.options.fillColor = '#73D737';
+      } else if (totalBudaya <= low) {
+        layer.options.fillColor = '#FB4141';
+      } else {
+        layer.options.fillColor = '#E1FB41';
+      }
     }
   };
 
@@ -45,19 +60,26 @@ export default function Maps(props) {
         {data && data.map((i, idx) => (
           <Marker
             key={idx}
-            position={[i.latitude, i.longitude]}
+            position={[i.Provinsi?.latitude || '', i.Provinsi?.longitude || '']}
             eventHandlers={{
               click: () => {
-                handleClick(i.id, i.nama_provinsi)
+                handleClick(i.ProvinsiId, i.Provinsi?.nama_provinsi)
               },
             }}
-          />
+          >
+            <Tooltip>
+              <b>{i.Provinsi?.nama_provinsi}</b>
+              <p>{parseInt(i.totalBudaya) + 1} Budaya</p>
+            </Tooltip>
+          </Marker>
         ))}
-        <GeoJSON
-          style={countryStyle}
-          data={geoJson}
-          onEachFeature={onEachProvince}
-        />
+        {(data.length > 0) && (
+          <GeoJSON
+            style={countryStyle}
+            data={geoJson}
+            onEachFeature={onEachProvince}
+          />
+        )}
         <ZoomControl position='topright' />
       </MapContainer>
     </div>
