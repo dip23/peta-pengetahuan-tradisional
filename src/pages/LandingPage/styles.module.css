@@ -2,3 +2,15 @@
   position: fixed;
   z-index: 2;
 }
+
+.right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding-right: 1rem;
+  padding-top: 1rem;
+}
+
+.buttonSign>span {
+  margin-left: 0.5rem;
+}

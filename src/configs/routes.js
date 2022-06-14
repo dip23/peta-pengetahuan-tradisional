@@ -11,4 +11,7 @@ export const routes = {
   ADMIN: () => {
     return `/admin`;
   },
+  LOGIN: () => {
+    return `/login`;
+  },
 }

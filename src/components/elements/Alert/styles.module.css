@@ -1,0 +1,8 @@
+.root {
+  padding: 0.5rem;
+  width: 100%;
+  background-color: #DA3131;
+  color: var(--white);
+  border-radius: 5px;
+  text-align: center;
+}

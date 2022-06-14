@@ -33,7 +33,7 @@ export default function SearchBar(props) {
             resultData.map((i, idx) => (
               <div onClick={() => onClickResult(i.id)} key={idx}>
                 <span><FontAwesomeIcon icon={faLocationDot} /></span>
-                <p>{`${i.nama_budaya}, ${i.Provinsi.nama_provinsi}`}</p>
+                <p><b>{i.nama_budaya}</b>, {i.Provinsi.nama_provinsi}</p>
               </div>
             ))
           ) : (

@@ -10,6 +10,9 @@ import DetailBudaya from '../../components/fragments/DetailBudaya';
 import { useNavigate } from 'react-router';
 import { routes } from '../../configs/routes';
 import { useSearchParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import Button from '../../components/elements/Button';
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -85,6 +88,15 @@ export default function LandingPage() {
           resultData={filteredResult}
         />
         {renderContent()}
+        <div className={styles.right}>
+          <Button
+            className={styles.buttonSign}
+            type={'button'}
+            onClick={() => navigate(routes.LOGIN())}
+          >
+            Sign In <span><FontAwesomeIcon icon={faUser} /></span>
+          </Button>
+        </div>
       </div>
       <Maps
         data={dataProvinsi}

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './styles.module.css';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types';
 
 export default function Modal(props) {
   const {
@@ -35,4 +36,18 @@ export default function Modal(props) {
   );
 }
 
+Modal.defaultProps = {
+  children: null,
+  className: '',
+  onClose: () => { },
+  show: false,
+  title: ''
+};
 
+Modal.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  onClose: PropTypes.func,
+  show: PropTypes.bool,
+  title: PropTypes.string
+}

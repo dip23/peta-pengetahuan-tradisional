@@ -4,23 +4,23 @@ import {
   MapContainer,
   TileLayer,
   Marker,
-  ZoomControl,
   GeoJSON,
   Tooltip,
 } from 'react-leaflet';
 import calculationAPI from '../../../api/calculationAPI';
 
 export default function Maps(props) {
+  console.log('render')
   const {
     data,
     geoJson,
-    handleClick
+    handleClick,
   } = props;
 
   const [dataCalc, setDataCalc] = useState({});
 
   const fetchData = async () => {
-    const res = await calculationAPI.getAllCalculate();
+    const res = await calculationAPI.getAllCalculate(0.8);
     setDataCalc(res.data.data);
   };
 
@@ -80,7 +80,6 @@ export default function Maps(props) {
             onEachFeature={onEachProvince}
           />
         )}
-        <ZoomControl position='topright' />
       </MapContainer>
     </div>
   )

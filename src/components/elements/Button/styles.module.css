@@ -1,0 +1,12 @@
+.root {
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: var(--white);
+  color: var(--mid-grey);
+  border-radius: 5px;
+  border: none;
+}
+
+.root:hover {
+  cursor: pointer;
+}

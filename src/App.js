@@ -5,6 +5,7 @@ import { routes } from './configs/routes';
 
 const LandingPage = React.lazy(() => import('./pages/LandingPage'));
 const Admin = React.lazy(() => import('./pages/Admin'));
+const Login = React.lazy(() => import('./pages/Login'));
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route element={<LandingPage />} exact path={routes.LANDING_PAGE()} />
             <Route element={<Admin />} exact path={routes.ADMIN()} />
+            <Route element={<Login />} exact path={routes.LOGIN()} />
           </Routes>
         </Router>
       </Suspense>
