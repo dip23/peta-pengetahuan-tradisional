@@ -1,0 +1,28 @@
+.modalDelete>div {
+  width: fit-content;
+}
+
+.root>p {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.root>div {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.root>div>button {
+  width: 8rem;
+}
+
+.root>div>button:first-child {
+  border: 1px solid var(--mid-grey) !important;
+}
+
+.root>div>button:last-child {
+  background-color: var(--mid-grey) !important;
+  color: var(--white) !important;
+}

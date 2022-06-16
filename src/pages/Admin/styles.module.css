@@ -1,0 +1,43 @@
+.root {
+  padding: 2.5rem;
+}
+
+.header {
+  text-align: right;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.header>div:first-child>svg {
+  margin-right: 0.5rem;
+}
+
+.header>div:last-child:hover {
+  cursor: pointer;
+}
+
+.content>div:first-child {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.content>div:first-child>p {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.buttonAdd {
+  background-color: var(--mid-grey) !important;
+  color: var(--white) !important;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.content>table {
+  margin-bottom: 1rem;
+}

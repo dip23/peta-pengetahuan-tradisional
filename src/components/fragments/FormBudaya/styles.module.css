@@ -1,0 +1,55 @@
+.root>.image {
+  width: 14rem;
+  height: 14rem;
+}
+
+.root>.image>img {
+  width: inherit;
+  height: inherit;
+}
+
+.root>.field {
+  display: grid;
+  grid-template-columns: 22.5rem 22.5rem auto;
+  gap: 2.5rem;
+}
+
+.root>.field>div:not(:last-child)>div:first-child {
+  margin-bottom: 1.35rem;
+}
+
+.root>.field>div>.textBlock {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.root>.field>div>.textBlock>div {
+  width: 100%;
+}
+
+.root>.submitFooter {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.root>.submitFooter>button {
+  width: 10rem;
+}
+
+.root>.submitFooter>button:first-child {
+  background-color: var(--mid-grey) !important;
+  color: var(--white) !important;
+}
+
+.root>.submitFooter>button:last-child {
+  border: 1px solid var(--mid-grey) !important;
+}
+
+.root>div {
+  margin-bottom: 2rem;
+}
+
+.alert {
+  width: fit-content;
+}

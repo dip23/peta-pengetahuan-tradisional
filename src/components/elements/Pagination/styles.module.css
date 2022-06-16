@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+}
+
+.inputPage {
+  width: max-content;
+  text-align: center;
+}

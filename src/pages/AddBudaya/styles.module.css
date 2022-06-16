@@ -1,0 +1,13 @@
+.root {
+  padding: 2.5rem;
+}
+
+.root>p {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.root>div {
+  margin-bottom: 1rem;
+}

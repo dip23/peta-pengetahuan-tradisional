@@ -10,7 +10,6 @@ import {
 import calculationAPI from '../../../api/calculationAPI';
 
 export default function Maps(props) {
-  console.log('render')
   const {
     data,
     geoJson,

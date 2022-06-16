@@ -1,0 +1,42 @@
+.root {
+  width: 100%;
+  border-spacing: 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.root>thead {
+  background-color: var(--mid-grey);
+  border: none;
+  color: var(--white);
+}
+
+.root>thead>tr>th,
+.root>tbody>tr>td {
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+
+.root>thead>tr>th:not(:nth-child(2)),
+.root>tbody>tr>td:not(:nth-child(2)) {
+  text-align: center;
+}
+
+.root>thead>tr>th:nth-child(2) {
+  width: 50rem;
+}
+
+.root>thead>tr>th:first-child {
+  border-top-left-radius: 5px;
+}
+
+.root>thead>tr>th:last-child {
+  border-top-right-radius: 5px;
+}
+
+.root>tbody>tr:last-child>td:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+.root>tbody>tr:last-child>td:last-child {
+  border-bottom-right-radius: 5px;
+}

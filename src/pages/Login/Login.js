@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './styles.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Text from '../../components/fields/Text';
 import Button from '../../components/elements/Button';
-import { useNavigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 import { routes } from '../../configs/routes';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Alert from '../../components/elements/Alert';
 import adminAPI from '../../api/admin';
 import { loginSchema } from './validation';
+import { UserContext } from '../../context/UserContext';
 
 export default function Login() {
+  const { user, setUser } = useContext(UserContext);
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(loginSchema)
   });
@@ -28,9 +30,8 @@ export default function Login() {
   const submitForm = async (data) => {
     try {
       const res = await adminAPI.login(data);
-      console.log(res.data.data);
+      setUser(res.data.data);
       setAlert(false);
-      navigate(routes.ADMIN());
     } catch (error) {
       setMessage(error.response.data.message)
       setAlert(true)
@@ -71,6 +72,7 @@ export default function Login() {
           <Button className={styles.submitButton} type="submit">Sign In</Button>
         </form>
       </div>
+      {user && <Navigate to={routes.ADMIN()} />}
     </div>
   )
 }

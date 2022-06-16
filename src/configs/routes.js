@@ -14,4 +14,10 @@ export const routes = {
   LOGIN: () => {
     return `/login`;
   },
+  ADD_BUDAYA: () => {
+    return `/addBudaya`;
+  },
+  EDIT_BUDAYA: (id) => {
+    return `/editBudaya?id=${id}`
+  }
 }
