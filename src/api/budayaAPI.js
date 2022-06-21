@@ -5,7 +5,7 @@ const budayaAPI = {
     return Api.get('/budaya');
   },
   getBudayaPage(limit, page) {
-    return Api.get(`/budaya/all?limit=${limit}&page=${page}`);
+    return Api.get(`/budaya/all?limit=${limit}&page=${page}`, {withCredentials: true});
   },
   getListBudaya(provinceId) {
     return Api.get(`/budaya/list/${provinceId}`);
