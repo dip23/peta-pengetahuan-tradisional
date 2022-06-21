@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './styles.module.css';
 import {
   MapContainer,
@@ -7,25 +7,15 @@ import {
   GeoJSON,
   Tooltip,
 } from 'react-leaflet';
-import calculationAPI from '../../../api/calculationAPI';
 
 export default function Maps(props) {
   const {
     data,
     geoJson,
     handleClick,
+    high,
+    low
   } = props;
-
-  const [dataCalc, setDataCalc] = useState({});
-
-  const fetchData = async () => {
-    const res = await calculationAPI.getAllCalculate(0.8);
-    setDataCalc(res.data.data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const countryStyle = {
     fillOpacity: 0.7,
@@ -33,9 +23,9 @@ export default function Maps(props) {
     weight: 2
   };
 
+  console.log(high, low);
+
   const onEachProvince = (province, layer) => {
-    let high = dataCalc?.high;
-    let low = dataCalc?.low;
     const totalBudaya = parseInt(data[province.index]?.totalBudaya) + 1;
 
     if (!isNaN(totalBudaya)) {
@@ -72,7 +62,7 @@ export default function Maps(props) {
             </Tooltip>
           </Marker>
         ))}
-        {(data.length > 0) && (
+        {(data.length > 0) && high && low && (
           <GeoJSON
             style={countryStyle}
             data={geoJson}

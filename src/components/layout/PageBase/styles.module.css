@@ -1,0 +1,79 @@
+.aside {
+  background-color: var(--mid-grey);
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 22rem;
+  display: flex;
+  padding: 1.5rem 1.5rem;
+}
+
+.content {
+  padding: 2.5rem;
+  margin-left: 22rem;
+}
+
+.header{
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.header > div:first-child{
+  width: 3.25rem;
+  height: auto;
+} 
+
+.header > div:first-child > img{
+  width: inherit;
+  height: inherit;
+}
+
+.header > div:last-child > p{
+  color: var(--white);
+}
+
+.header > div:last-child > p:first-child {
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+.header > div:last-child > p:last-child {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.navItem>a{
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+
+.navItem>a>div{
+  display: flex;
+  gap: 1rem;
+  color: var(--white);
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.isActive{
+  background-color: var(--white);
+  color: var(--mid-grey) !important;
+  border-radius: 5px;
+}
+
+.signOut{
+  display: flex;
+  gap: 1rem;
+  color: var(--white);
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+}

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,700&family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 .leaflet-container {
   width: 100%;
@@ -6,7 +6,7 @@
 }
 
 * {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -17,7 +17,7 @@
   --black-default: #434A42;
   --grey: #626C66;
   --secondary-grey: #6B8E84;
-  --mid-grey: #918B76;
+  --mid-grey: #1A4349;
   --sage: #ACA885;
   --wheat: #E1CA96;
   --white: #FFFFFF;

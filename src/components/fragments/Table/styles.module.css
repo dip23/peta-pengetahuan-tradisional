@@ -16,13 +16,13 @@
   text-align: left;
 }
 
-.root>thead>tr>th:not(:nth-child(2)),
-.root>tbody>tr>td:not(:nth-child(2)) {
+.root>thead>tr>th:not(:nth-child(2),:nth-child(3)),
+.root>tbody>tr>td:not(:nth-child(2),:nth-child(3)) {
   text-align: center;
 }
 
 .root>thead>tr>th:nth-child(2) {
-  width: 50rem;
+  width: 23rem;
 }
 
 .root>thead>tr>th:first-child {

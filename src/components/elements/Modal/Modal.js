@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 
 export default function Modal(props) {
-  console.log('render modal')
   const {
     children,
     className,

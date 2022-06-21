@@ -1,20 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react'
 import style from './styles.module.css';
 import { useNavigate } from 'react-router';
-import adminAPI from '../../api/admin'
 import budayaAPI from '../../api/budayaAPI';
 import { routes } from '../../configs/routes';
 import { UserContext } from '../../context/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEdit, faTrash, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Table from '../../components/fragments/Table';
-import Button from '../../components/elements/Button';
 import ModalDelete from '../../components/fragments/ModalDelete/ModalDelete';
 import Pagination from '../../components/elements/Pagination';
+import EditBudaya from '../../components/fragments/EditBudaya';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Admin() {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const [searchParams] = useSearchParams();
+  const edit = searchParams.get('editBudaya');
+  const { user } = useContext(UserContext);
   const [openDelete, setOpenDelete] = useState(false);
   const [deletedData, setDeletedData] = useState(null);
   const [pageData, setPageData] = useState({
@@ -28,18 +30,7 @@ export default function Admin() {
     totalPages: 0,
     totalRows: 0
   });
-
-  const handleLogout = async () => {
-    try {
-      const res = await adminAPI.logout();
-      if (res.data.success) {
-        setUser(null);
-        navigate(routes.LOGIN());
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [editData, setEditData] = useState([]);
 
   const fetchData = async () => {
     const res = await budayaAPI.getBudayaPage(10, currentPage);
@@ -64,14 +55,14 @@ export default function Admin() {
     fetchData();
   }, [currentPage]);
 
-  const handleClick = (id) => {
-    console.log(id);
+  const handleClick = (data) => {
+    setEditData(data);
+    navigate(routes.EDIT_BUDAYA(data.id))
   };
 
   const handleDelete = (id) => {
     setDeletedData(id);
     setOpenDelete(true);
-    console.log(id);
   };
 
   const editColumn = (e) => {
@@ -112,6 +103,10 @@ export default function Admin() {
       accessor: 'nama_budaya'
     },
     {
+      Header: 'Provinsi',
+      accessor: 'Provinsi.nama_provinsi'
+    },
+    {
       Header: 'Tahun',
       accessor: 'tahun'
     },
@@ -121,7 +116,7 @@ export default function Admin() {
     },
     {
       Header: 'Edit',
-      accessor: ({ id }) => editColumn(id)
+      accessor: editColumn
     },
     {
       Header: 'Delete',
@@ -129,18 +124,18 @@ export default function Admin() {
     },
   ];
 
+  if(edit){
+    return <EditBudaya data={editData}/>
+  }
+
   return (
     <section className={style.root}>
       <div className={style.header}>
         <div><FontAwesomeIcon icon={faUser} /> Hi, {user?.nama}!</div>
-        <div onClick={handleLogout}><FontAwesomeIcon icon={faRightFromBracket} /></div>
       </div>
       <div className={style.content}>
         <div>
           <p>Manajemen Kebudayaan Pengetahuan Tradisional</p>
-          <Button className={style.buttonAdd} type="button" onClick={() => navigate(routes.ADD_BUDAYA())}>
-            Tambah Budaya
-          </Button>
         </div>
         <Table columnTable={COLUMNS} dataTable={pageData.rowData} />
         <Pagination

@@ -1,11 +1,11 @@
-.root>.image {
+.root>.image{
+  width: 20rem;
+}
+.root>.image>img {
   width: 14rem;
   height: 14rem;
-}
-
-.root>.image>img {
-  width: inherit;
-  height: inherit;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .root>.field {
@@ -46,8 +46,8 @@
   border: 1px solid var(--mid-grey) !important;
 }
 
-.root>div {
-  margin-bottom: 2rem;
+.root>div:not(:last-child) {
+  margin-bottom: 1rem;
 }
 
 .alert {

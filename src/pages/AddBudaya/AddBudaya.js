@@ -12,18 +12,17 @@ export default function AddBudaya() {
   const navigate = useNavigate();
 
   const submitForm = async (data) => {
-    const dataForm = {
-      nama_budaya: data.nama_budaya,
-      image: data.image || '',
-      tahun: data.tahun,
-      desc: data.desc,
-      video: data.video || '',
-      JenisBudayaId: parseInt(data.jenis_budaya),
-      ProvinsiId: parseInt(data.idProvinsi)
-    }
-    console.log(dataForm);
+    const formData = new FormData();
+    formData.append('nama_budaya', data.nama_budaya);
+    formData.append('image', data.image ? data.image[0] : undefined);
+    formData.append('tahun', data.tahun);
+    formData.append('desc', data.desc);
+    formData.append('video', data.video || '');
+    formData.append('JenisBudayaId', parseInt(data.jenis_budaya));
+    formData.append('ProvinsiId', parseInt(data.idProvinsi));
+    
     try {
-      const res = await budayaAPI.addData(dataForm);
+      const res = await budayaAPI.addData(formData);
       if (res.data.success) {
         navigate(routes.ADMIN());
         setAlert(false);

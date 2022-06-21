@@ -21,7 +21,7 @@ export default function SearchBar(props) {
 
   return (
     <div className={styles.root}>
-      <div>Peta Persebaran Pengetahuan Tradisional Indonesia</div>
+      <div>Persebaran Pengetahuan Tradisional Indonesia</div>
       <Search
         inputProps={inputProps}
         className={styles.searchInput}

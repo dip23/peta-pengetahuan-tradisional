@@ -15,9 +15,9 @@ export const routes = {
     return `/login`;
   },
   ADD_BUDAYA: () => {
-    return `/addBudaya`;
+    return `/admin/addBudaya`;
   },
   EDIT_BUDAYA: (id) => {
-    return `/editBudaya?id=${id}`
+    return `/admin?editBudaya=true&id=${id}`
   }
 }

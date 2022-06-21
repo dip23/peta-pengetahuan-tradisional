@@ -13,7 +13,8 @@ export default function Select(props) {
     error,
     options,
     displayValue,
-    onChange
+    onChange,
+    selected
   } = props;
 
   const classes = [styles.root, className].filter(Boolean).join(' ');
@@ -34,6 +35,7 @@ export default function Select(props) {
           <option
             key={idx}
             value={i.id}
+            selected={selected === i.id}
           >
             {i[displayValue]}
           </option>

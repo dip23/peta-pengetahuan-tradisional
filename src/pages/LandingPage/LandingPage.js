@@ -13,6 +13,8 @@ import { useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Button from '../../components/elements/Button';
+import MapsDesc from '../../components/fragments/MapsDesc/MapsDesc';
+import calculationAPI from '../../api/calculationAPI';
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -25,12 +27,15 @@ export default function LandingPage() {
   const [filteredResult, setFilteredResult] = useState([]);
   const [dataProvinsi, setDataProvinsi] = useState([]);
   const [dataBudaya, setDataBudaya] = useState([]);
+  const [dataCalc, setDataCalc] = useState({});
 
   const fetchData = async () => {
     const res = await provinceAPI.getAllDataProvinces();
     const resBudaya = await budayaAPI.getAllBudaya();
+    const resCalc = await calculationAPI.getAllCalculate(0.8);
     setDataProvinsi(res.data.data);
     setDataBudaya(resBudaya.data.data);
+    setDataCalc(resCalc.data.data);
   };
 
   useEffect(() => {
@@ -88,20 +93,21 @@ export default function LandingPage() {
           resultData={filteredResult}
         />
         {renderContent()}
-        <div className={styles.right}>
-          <Button
-            className={styles.buttonSign}
-            type={'button'}
-            onClick={() => navigate(routes.LOGIN())}
-          >
-            Sign In <span><FontAwesomeIcon icon={faUser} /></span>
-          </Button>
-        </div>
+        <Button
+          className={styles.buttonSign}
+          type={'button'}
+          onClick={() => navigate(routes.LOGIN())}
+        >
+          Sign In <span><FontAwesomeIcon icon={faUser} /></span>
+        </Button>
+        <MapsDesc high={dataCalc.high} low={dataCalc.low}/>
       </div>
       <Maps
         data={dataProvinsi}
         geoJson={feature}
         handleClick={handleClickLocation}
+        high={dataCalc.high}
+        low={dataCalc.low}
       />
     </div>
   )

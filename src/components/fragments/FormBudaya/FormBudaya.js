@@ -1,31 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formBudayaSchema } from './validation';
-import addImage from '../../../assets/add-image.svg';
+import imgDefault from '../../../assets/img-default.svg';
 import style from './styles.module.css';
 import Text from '../../fields/Text';
 import Button from '../../elements/Button';
 import { useNavigate } from 'react-router';
 import provinceAPI from '../../../api/provinceAPI';
 import Select from '../../fields/Select/Select';
+import checkURL from '../../../helpers/checkURL';
 
-export default function FormBudaya({ handleSubmitForm }) {
-  const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm({
+export default function FormBudaya({ handleSubmitForm, preloadValues }) {
+  const { 
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors }
+  } = useForm({
+    defaultValues: preloadValues,
     resolver: yupResolver(formBudayaSchema)
   });
-
+  const navigate = useNavigate();  
   const [provinsi, setProvinsi] = useState([]);
+
+  const watchImage = watch("image");
+
+  const imageURL = useMemo(()=>{
+    if(typeof watchImage === 'string' && checkURL(watchImage)){
+      return watchImage;
+    }
+    if(watchImage?.length > 0 && watchImage !=='undefined'){
+      return URL.createObjectURL(watchImage[0]);
+    }
+    return '';
+  }, [watchImage]);
 
   const inputProps = [
     { type: "text", placeholder: "Masukkan Nama Budaya" },
     { type: "number", placeholder: "2022" },
-    { type: "text", placeholder: "Pilih Jenis Budaya" },
+    { type: "text", placeholder: "Pilih Jenis Budaya", defaultValue: preloadValues?.jenis_budaya },
     { type: "number", placeholder: "No.Registrasi" },
-    { type: "text", placeholder: "Jawa Barat" },
+    { type: "text", placeholder: "Jawa Barat", defaultValue: preloadValues?.idProvinsi },
     { type: "text" }
   ];
+
+  const inputPropsFile = {
+    type: "file",
+    accept: "image/*"
+  };
 
   const fetchDataProvinsi = async () => {
     const res = await provinceAPI.getProvinces();
@@ -35,11 +58,12 @@ export default function FormBudaya({ handleSubmitForm }) {
   useEffect(() => {
     fetchDataProvinsi();
   }, [])
-
+  
   return (
     <form onSubmit={handleSubmit(handleSubmitForm)} className={style.root}>
       <div className={style.image}>
-        <img alt="add-img" src={addImage} />
+        <Text label="Masukkan Gambar" name="image" inputProps={inputPropsFile} register={register}/>
+        <img alt='choose' src={imageURL || preloadValues.image || imgDefault}/>
       </div>
       <div className={style.field}>
         <div>
@@ -64,6 +88,7 @@ export default function FormBudaya({ handleSubmitForm }) {
               inputProps={inputProps[2]}
               error={errors?.jenis_budaya?.message}
               register={register}
+              selected={preloadValues?.jenis_budaya}
               displayValue={'nama_jenis'}
               options={[
                 { id: 1, nama_jenis: 'Pencatatan' },
@@ -85,6 +110,7 @@ export default function FormBudaya({ handleSubmitForm }) {
             inputProps={inputProps[4]}
             error={errors?.idProvinsi?.message}
             register={register}
+            selected={preloadValues?.idProvinsi}
             displayValue={'nama_provinsi'}
             options={provinsi}
           />
@@ -101,7 +127,7 @@ export default function FormBudaya({ handleSubmitForm }) {
       </div>
       <div className={style.submitFooter}>
         <Button type="submit">Simpan</Button>
-        <Button onClick={() => navigate(-1)}>Batal</Button>
+        <Button onClick={() => navigate(-1)} type={'button'}>Batal</Button>
       </div>
     </form>
   )
