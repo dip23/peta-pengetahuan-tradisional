@@ -63,7 +63,7 @@ export default function FormBudaya({ handleSubmitForm, preloadValues }) {
     <form onSubmit={handleSubmit(handleSubmitForm)} className={style.root}>
       <div className={style.image}>
         <Text label="Masukkan Gambar" name="image" inputProps={inputPropsFile} register={register}/>
-        <img alt='choose' src={imageURL || preloadValues.image || imgDefault}/>
+        <img alt='choose' src={imageURL || preloadValues?.image || imgDefault}/>
       </div>
       <div className={style.field}>
         <div>
