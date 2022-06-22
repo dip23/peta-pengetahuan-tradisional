@@ -18,12 +18,10 @@ export default function Maps(props) {
   } = props;
 
   const countryStyle = {
-    fillOpacity: 0.7,
+    fillOpacity: 0.5,
     color: 'black',
     weight: 2
   };
-
-  console.log(high, low);
 
   const onEachProvince = (province, layer) => {
     const totalBudaya = parseInt(data[province.index]?.totalBudaya) + 1;
@@ -37,6 +35,31 @@ export default function Maps(props) {
         layer.options.fillColor = '#E1FB41';
       }
     }
+
+    layer.on("click", function () {
+      handleClick(
+        data[province.index]?.ProvinsiId,
+        data[province.index]?.Provinsi?.nama_provinsi,
+      )
+    })
+
+    layer.on("mouseover", function (e){
+      const target = e.target;
+      target.setStyle({
+        color: 'black',
+        fillOpacity: 0.8,
+        weight: 2
+      })
+    })
+
+    layer.on("mouseout", function (e){
+      const target = e.target;
+      target.setStyle({
+        fillOpacity: 0.5,
+        color: 'black',
+        weight: 2
+      })
+    })
   };
 
   return (

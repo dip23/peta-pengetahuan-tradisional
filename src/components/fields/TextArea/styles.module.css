@@ -1,0 +1,19 @@
+.root > label {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.root > textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.root > p {
+  color: #d80303;
+}

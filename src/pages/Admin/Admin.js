@@ -1,34 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react'
-import style from './styles.module.css';
-import { useNavigate } from 'react-router';
-import budayaAPI from '../../api/budayaAPI';
-import { routes } from '../../configs/routes';
-import { UserContext } from '../../context/UserContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import Table from '../../components/fragments/Table';
-import ModalDelete from '../../components/fragments/ModalDelete/ModalDelete';
-import Pagination from '../../components/elements/Pagination';
-import EditBudaya from '../../components/fragments/EditBudaya';
-import { useSearchParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
+import style from "./styles.module.css";
+import { useNavigate } from "react-router";
+import budayaAPI from "../../api/budayaAPI";
+import { routes } from "../../configs/routes";
+import { UserContext } from "../../context/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import Table from "../../components/fragments/Table";
+import ModalDelete from "../../components/fragments/ModalDelete/ModalDelete";
+import Pagination from "../../components/elements/Pagination";
+import EditBudaya from "../../components/fragments/EditBudaya";
+import { useSearchParams } from "react-router-dom";
 
 export default function Admin() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const edit = searchParams.get('editBudaya');
+  const edit = searchParams.get("editBudaya");
   const { user } = useContext(UserContext);
   const [openDelete, setOpenDelete] = useState(false);
   const [deletedData, setDeletedData] = useState(null);
   const [pageData, setPageData] = useState({
     isLoading: false,
-    rowData: []
+    rowData: [],
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [navigation, setNavigation] = useState({
     hasNext: false,
     hasPrev: false,
     totalPages: 0,
-    totalRows: 0
+    totalRows: 0,
   });
   const [editData, setEditData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -37,18 +37,18 @@ export default function Admin() {
     try {
       setLoading(true);
       const res = await budayaAPI.getBudayaPage(10, currentPage);
-      if(res.data.sucess){
+      if (res.data.sucess) {
         setPageData({
           isLoading: false,
           rowData: res.data.data,
-          size: res.data.cursor.size
+          size: res.data.cursor.size,
         });
         setNavigation({
           hasNext: res.data.cursor.hasNext,
           hasPrev: res.data.cursor.hasPrev,
           totalPages: res.data.cursor.totalPages,
-          totalRows: res.data.cursor.totalRows
-        })
+          totalRows: res.data.cursor.totalRows,
+        });
         setLoading(false);
       }
     } catch (error) {
@@ -60,14 +60,14 @@ export default function Admin() {
   useEffect(() => {
     setPageData({
       isLoading: true,
-      rowData: []
-    })
+      rowData: [],
+    });
     fetchData();
   }, [currentPage]);
 
   const handleClick = (data) => {
     setEditData(data);
-    navigate(routes.EDIT_BUDAYA(data.id))
+    navigate(routes.EDIT_BUDAYA(data.id));
   };
 
   const handleDelete = (id) => {
@@ -88,7 +88,7 @@ export default function Admin() {
       <div className={style.clickable} onClick={() => handleDelete(e)}>
         <FontAwesomeIcon icon={faTrash} />
       </div>
-    )
+    );
   };
 
   const deleteFunction = async () => {
@@ -99,55 +99,71 @@ export default function Admin() {
         fetchData();
       }
     } catch (error) {
-      console.log(error.response)
+      console.log(error.response);
     }
-  }
+  };
+
+  const rowNumber = (row) => {
+    let num = row + 1;
+    if (currentPage > 1) {
+      num = (row + 1) + (currentPage - 1) * 10;
+    }
+
+    return <div>{num}</div>;
+  };
 
   const COLUMNS = [
     {
-      Header: 'No.',
-      accessor: 'id'
+      Header: "No.",
+      id: "row",
+      Cell: ({ row }) => rowNumber(row.index),
     },
     {
-      Header: 'Nama Budaya',
-      accessor: 'nama_budaya'
+      Header: "Nama Budaya",
+      accessor: "nama_budaya",
     },
     {
-      Header: 'Provinsi',
-      accessor: 'Provinsi.nama_provinsi'
+      Header: "Provinsi",
+      accessor: "Provinsi.nama_provinsi",
     },
     {
-      Header: 'Tahun',
-      accessor: 'tahun'
+      Header: "Tahun",
+      accessor: "tahun",
     },
     {
-      Header: 'No. Registrasi',
-      accessor: 'registNum'
+      Header: "No. Registrasi",
+      accessor: "registNum",
     },
     {
-      Header: 'Edit',
-      accessor: editColumn
+      Header: "Edit",
+      accessor: editColumn,
     },
     {
-      Header: 'Delete',
-      accessor: ({ id }) => deleteColumn(id)
+      Header: "Delete",
+      accessor: ({ id }) => deleteColumn(id),
     },
   ];
 
-  if(edit){
-    return <EditBudaya data={editData}/>
+  if (edit) {
+    return <EditBudaya data={editData} />;
   }
 
   return (
     <section className={style.root}>
       <div className={style.header}>
-        <div><FontAwesomeIcon icon={faUser} /> Hi, {user?.nama}!</div>
+        <div>
+          <FontAwesomeIcon icon={faUser} /> Hi, {user?.nama}!
+        </div>
       </div>
       <div className={style.content}>
         <div>
           <p>Manajemen Kebudayaan Pengetahuan Tradisional</p>
         </div>
-        <Table columnTable={COLUMNS} dataTable={pageData.rowData} isLoading={true} />
+        <Table
+          columnTable={COLUMNS}
+          dataTable={pageData.rowData}
+          isLoading={loading}
+        />
         <Pagination
           currentPage={currentPage}
           hasNext={navigation.hasNext}
@@ -163,5 +179,5 @@ export default function Admin() {
         />
       </div>
     </section>
-  )
+  );
 }

@@ -28,3 +28,13 @@ export default function MapsDesc(props) {
     </div>
   )
 }
+
+MapsDesc.defaultProps = {
+  high: 0,
+  low: 0 
+};
+
+MapsDesc.propTypes = {
+  high: PropTypes.number,
+  low: PropTypes.number
+}

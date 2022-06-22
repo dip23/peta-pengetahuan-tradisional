@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 import defaultImage from '../../../assets/img-default.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleInfo, faClose } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import budayaAPI from '../../../api/budayaAPI';
@@ -42,11 +42,11 @@ export default function DetailBudaya() {
           src={detail.image || defaultImage}
           onError={(e) => { e.target.onerror = null; e.target.src = defaultImage }}
         />
-        <FontAwesomeIcon
-          className={styles.close}
-          icon={faClose}
-          onClick={() => navigate(-1)}
-        />
+        <div className={styles.close} onClick={() => navigate(-1)}>
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+          />
+        </div>
       </div>
       <div className={styles.title}>
         <div>

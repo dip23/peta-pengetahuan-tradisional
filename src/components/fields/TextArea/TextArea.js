@@ -20,7 +20,7 @@ export default function TextArea(props) {
       {label && (
         <label htmlFor={label}>{label}</label>
       )}
-      <input {...inputProps} disabled={disabled} {...register(name)} />
+      <textarea {...inputProps} disabled={disabled} {...register(name)} />
       {error && (
         <p>{error}</p>
       )}

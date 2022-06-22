@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router';
 import provinceAPI from '../../../api/provinceAPI';
 import Select from '../../fields/Select/Select';
 import checkURL from '../../../helpers/checkURL';
+import TextArea from '../../fields/TextArea';
 
 export default function FormBudaya({ handleSubmitForm, preloadValues, isLoading }) {
   const { 
@@ -116,7 +117,8 @@ export default function FormBudaya({ handleSubmitForm, preloadValues, isLoading 
           />
         </div>
         <div>
-          <Text
+          <TextArea
+            className={style.textDesc}
             label="Deskripsi"
             name="desc"
             inputProps={inputProps[5]}

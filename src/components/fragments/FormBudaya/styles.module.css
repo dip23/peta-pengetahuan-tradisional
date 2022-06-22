@@ -10,7 +10,7 @@
 
 .root>.field {
   display: grid;
-  grid-template-columns: 22.5rem 22.5rem auto;
+  grid-template-columns: 18.5rem 20.5rem auto;
   gap: 2.5rem;
 }
 
@@ -24,7 +24,11 @@
   gap: 1rem;
 }
 
-.root>.field>div>.textBlock>div {
+.root>.field>div>.textBlock>div:first-child {
+  width: 8rem;
+}
+
+.root>.field>div>.textBlock>div:last-child {
   width: 100%;
 }
 
@@ -48,6 +52,10 @@
 
 .root>div:not(:last-child) {
   margin-bottom: 1rem;
+}
+
+.textDesc>textarea {
+  height: 10.2rem;
 }
 
 .alert {
