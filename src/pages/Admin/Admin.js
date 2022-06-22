@@ -31,20 +31,30 @@ export default function Admin() {
     totalRows: 0
   });
   const [editData, setEditData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
-    const res = await budayaAPI.getBudayaPage(10, currentPage);
-    setPageData({
-      isLoading: false,
-      rowData: res.data.data,
-      size: res.data.cursor.size
-    });
-    setNavigation({
-      hasNext: res.data.cursor.hasNext,
-      hasPrev: res.data.cursor.hasPrev,
-      totalPages: res.data.cursor.totalPages,
-      totalRows: res.data.cursor.totalRows
-    })
+    try {
+      setLoading(true);
+      const res = await budayaAPI.getBudayaPage(10, currentPage);
+      if(res.data.sucess){
+        setPageData({
+          isLoading: false,
+          rowData: res.data.data,
+          size: res.data.cursor.size
+        });
+        setNavigation({
+          hasNext: res.data.cursor.hasNext,
+          hasPrev: res.data.cursor.hasPrev,
+          totalPages: res.data.cursor.totalPages,
+          totalRows: res.data.cursor.totalRows
+        })
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -137,7 +147,7 @@ export default function Admin() {
         <div>
           <p>Manajemen Kebudayaan Pengetahuan Tradisional</p>
         </div>
-        <Table columnTable={COLUMNS} dataTable={pageData.rowData} />
+        <Table columnTable={COLUMNS} dataTable={pageData.rowData} isLoading={true} />
         <Pagination
           currentPage={currentPage}
           hasNext={navigation.hasNext}

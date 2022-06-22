@@ -12,6 +12,7 @@ export default function EditBudaya({ data }) {
   const [alert, setAlert] = useState(false);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const submitForm = async (data) => {
     const formData = new FormData();
@@ -23,12 +24,15 @@ export default function EditBudaya({ data }) {
     formData.append('ProvinsiId', parseInt(data.idProvinsi));
 
     try {
+      setLoading(true);
       const res = await budayaAPI.editBudaya(id, formData);
       if (res.data.success) {
+        setLoading(false);
         navigate(routes.ADMIN());
         setAlert(false);
       }
     } catch (error) {
+      setLoading(false);
       setMessage(error.response.data.message)
       setAlert(true);
     }
@@ -51,7 +55,11 @@ export default function EditBudaya({ data }) {
         <Alert message={message}/>
       )}
       {data && (
-        <FormBudaya handleSubmitForm={submitForm} preloadValues={preloadValues}/>
+        <FormBudaya 
+          isLoading={loading}
+          handleSubmitForm={submitForm}
+          preloadValues={preloadValues}
+        />
       )}
     </div>
   )

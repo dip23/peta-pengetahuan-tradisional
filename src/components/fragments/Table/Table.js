@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import { useTable } from 'react-table';
+import Loader from '../../elements/Loader';
 import style from './styles.module.css';
 
-export default function Table({ columnTable, dataTable }) {
+export default function Table({ columnTable, dataTable, isLoading }) {
   const columns = useMemo(() => columnTable, [columnTable])
   const data = useMemo(() => dataTable, [dataTable])
 
@@ -31,16 +32,30 @@ export default function Table({ columnTable, dataTable }) {
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {data && rows.map((row) => {
-          prepareRow(row)
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-              })}
-            </tr>
-          );
-        })}
+        {data.length > 0 ? (
+          rows.map((row) => {
+            prepareRow(row)
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                })}
+              </tr>
+            );
+          })
+        ) : isLoading ? (
+          <tr>
+            <td className={style.oneRow} colSpan={columns.length}>
+              <Loader/>
+            </td>
+          </tr>
+        ) : (
+          <tr>
+            <td className={style.oneRow} colSpan={columns.length}>
+              Data Belum Ada
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

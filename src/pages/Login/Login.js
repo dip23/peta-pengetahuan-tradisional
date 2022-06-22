@@ -20,6 +20,7 @@ export default function Login() {
   });
   const [alert, setAlert] = useState(false);
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const inputProps = [
@@ -29,10 +30,16 @@ export default function Login() {
 
   const submitForm = async (data) => {
     try {
+      setLoading(true);
       const res = await adminAPI.login(data);
-      setUser(res.data.data);
-      setAlert(false);
+      if(res.data.success){
+        console.log('login');
+        setUser(res.data.data);
+        setAlert(false);
+        setLoading(false);
+      }
     } catch (error) {
+      setLoading(false);
       setMessage(error.response.data.message)
       setAlert(true)
     }
@@ -69,7 +76,9 @@ export default function Login() {
             inputProps={inputProps[1]}
             register={register}
           />
-          <Button className={styles.submitButton} type="submit">Sign In</Button>
+          <Button className={styles.submitButton} type="submit" disabled={loading}>
+            {loading ? 'Loading..' : 'Sign In'}
+          </Button>
         </form>
       </div>
       {user && <Navigate to={routes.ADMIN()} />}

@@ -11,7 +11,7 @@ import provinceAPI from '../../../api/provinceAPI';
 import Select from '../../fields/Select/Select';
 import checkURL from '../../../helpers/checkURL';
 
-export default function FormBudaya({ handleSubmitForm, preloadValues }) {
+export default function FormBudaya({ handleSubmitForm, preloadValues, isLoading }) {
   const { 
     register,
     handleSubmit,
@@ -126,8 +126,12 @@ export default function FormBudaya({ handleSubmitForm, preloadValues }) {
         </div>
       </div>
       <div className={style.submitFooter}>
-        <Button type="submit">Simpan</Button>
-        <Button onClick={() => navigate(-1)} type={'button'}>Batal</Button>
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? 'Loading..' : 'Simpan'}
+        </Button>
+        <Button disabled={isLoading} onClick={() => navigate(-1)} type={'button'}>
+          Batal
+        </Button>
       </div>
     </form>
   )

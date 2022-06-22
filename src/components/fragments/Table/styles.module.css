@@ -40,3 +40,12 @@
 .root>tbody>tr:last-child>td:last-child {
   border-bottom-right-radius: 5px;
 }
+
+.oneRow {
+  padding: 1rem !important;
+  text-align: center !important;
+}
+
+.oneRow > div{
+  margin: auto;
+}
