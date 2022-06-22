@@ -32,10 +32,10 @@ export default function LandingPage() {
   const fetchData = async () => {
     const res = await provinceAPI.getAllDataProvinces();
     setDataProvinsi(res.data.data);
-    const resBudaya = await budayaAPI.getAllBudaya();
-    setDataBudaya(resBudaya.data.data);
     const resCalc = await calculationAPI.getAllCalculate(0.8);
     setDataCalc(resCalc.data.data);
+    const resBudaya = await budayaAPI.getAllBudaya();
+    setDataBudaya(resBudaya.data.data);
   };
 
   useEffect(() => {

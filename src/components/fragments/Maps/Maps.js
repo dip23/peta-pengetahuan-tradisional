@@ -18,7 +18,7 @@ export default function Maps(props) {
   } = props;
 
   const countryStyle = {
-    fillOpacity: 0.5,
+    fillOpacity: 0.4,
     color: 'black',
     weight: 2
   };
@@ -55,7 +55,7 @@ export default function Maps(props) {
     layer.on("mouseout", function (e){
       const target = e.target;
       target.setStyle({
-        fillOpacity: 0.5,
+        fillOpacity: 0.4,
         color: 'black',
         weight: 2
       })
