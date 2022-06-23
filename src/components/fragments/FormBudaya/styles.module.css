@@ -10,26 +10,12 @@
 
 .root>.field {
   display: grid;
-  grid-template-columns: 18.5rem 20.5rem auto;
+  grid-template-columns: 20.5rem 10.5rem auto;
   gap: 2.5rem;
 }
 
 .root>.field>div:not(:last-child)>div:first-child {
   margin-bottom: 1.35rem;
-}
-
-.root>.field>div>.textBlock {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.root>.field>div>.textBlock>div:first-child {
-  width: 8rem;
-}
-
-.root>.field>div>.textBlock>div:last-child {
-  width: 100%;
 }
 
 .root>.submitFooter {

@@ -106,7 +106,7 @@ export default function Admin() {
   const rowNumber = (row) => {
     let num = row + 1;
     if (currentPage > 1) {
-      num = (row + 1) + (currentPage - 1) * 10;
+      num = row + 1 + (currentPage - 1) * 10;
     }
 
     return <div>{num}</div>;
