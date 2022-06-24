@@ -87,6 +87,7 @@ export default function FormBudaya({
         <img
           alt="choose"
           src={imageURL || preloadValues?.image || imgDefault}
+          onError={(e) => { e.target.onerror = null; e.target.src = imgDefault }}
         />
         <p>Maksimal File 2MB</p>
       </div>

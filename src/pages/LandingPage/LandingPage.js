@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SearchBar from '../../components/elements/SearchBar';
 import Maps from '../../components/fragments/Maps';
 import styles from './styles.module.css';
@@ -15,8 +15,10 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Button from '../../components/elements/Button';
 import MapsDesc from '../../components/fragments/MapsDesc/MapsDesc';
 import calculationAPI from '../../api/calculationAPI';
+import { UserContext } from '../../context/UserContext';
 
 export default function LandingPage() {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const id = parseInt(searchParams.get('id'));
@@ -98,7 +100,8 @@ export default function LandingPage() {
           type={'button'}
           onClick={() => navigate(routes.LOGIN())}
         >
-          Sign In <span><FontAwesomeIcon icon={faUser} /></span>
+          {user ? `Hi ${user.nama}!` : 'Sign In'} 
+          <span><FontAwesomeIcon icon={faUser} /></span>
         </Button>
         <MapsDesc high={dataCalc.high} low={dataCalc.low}/>
       </div>
