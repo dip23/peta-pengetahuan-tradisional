@@ -20,7 +20,6 @@ const budayaAPI = {
     return Api.post(`/budaya`, data)
   },
   editBudaya(idBudaya, data) {
-    console.log('edit')
     return Api.put(`/budaya/${idBudaya}`, data)
   }
 };

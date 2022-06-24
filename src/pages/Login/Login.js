@@ -33,7 +33,6 @@ export default function Login() {
       setLoading(true);
       const res = await adminAPI.login(data);
       if(res.data.success){
-        console.log('login');
         setUser(res.data.data);
         setAlert(false);
         setLoading(false);

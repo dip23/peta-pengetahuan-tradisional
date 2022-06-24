@@ -20,7 +20,7 @@ export default function AddBudaya() {
     formData.append('desc', data.desc);
     formData.append('video', data.video || '');
     formData.append('JenisBudayaId', parseInt(data.jenis_budaya));
-    formData.append('ProvinsiId', parseInt(data.idProvinsi));
+    formData.append('ProvinsiId', parseInt(data.idProvinsi || '1'));
     
     try {
       setLoading(true);

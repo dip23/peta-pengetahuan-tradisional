@@ -73,7 +73,7 @@ export default function FormBudaya({
   useEffect(() => {
     fetchDataProvinsi();
   }, []);
-
+  
   return (
     <form onSubmit={handleSubmit(handleSubmitForm)} className={style.root}>
       <div className={style.image}>
@@ -82,11 +82,13 @@ export default function FormBudaya({
           name="image"
           inputProps={inputPropsFile}
           register={register}
+          error={errors?.image?.message}
         />
         <img
           alt="choose"
           src={imageURL || preloadValues?.image || imgDefault}
         />
+        <p>Maksimal File 2MB</p>
       </div>
       <div className={style.field}>
         <div>
