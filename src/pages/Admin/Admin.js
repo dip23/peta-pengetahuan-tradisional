@@ -11,6 +11,7 @@ import ModalDelete from "../../components/fragments/ModalDelete/ModalDelete";
 import Pagination from "../../components/elements/Pagination";
 import EditBudaya from "../../components/fragments/EditBudaya";
 import { useSearchParams } from "react-router-dom";
+import Search from "../../components/fields/Search";
 
 export default function Admin() {
   const navigate = useNavigate();
@@ -33,10 +34,10 @@ export default function Admin() {
   const [editData, setEditData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = async (name) => {
     try {
       setLoading(true);
-      const res = await budayaAPI.getBudayaPage(10, currentPage);
+      const res = await budayaAPI.getBudayaPage(10, currentPage, name);
       if (res.data.sucess) {
         setPageData({
           isLoading: false,
@@ -144,6 +145,16 @@ export default function Admin() {
     },
   ];
 
+  const _submitSearch = (e) => {
+    e.preventDefault();
+    console.log(e.target[0].value)
+    fetchData(e.target[0].value);
+  }
+
+  const inputSearch = {
+    placeholder: 'Nama Budaya..'
+  }
+
   if (edit) {
     return <EditBudaya data={editData} />;
   }
@@ -152,12 +163,15 @@ export default function Admin() {
     <section className={style.root}>
       <div className={style.header}>
         <div>
+          <p>Manajemen Kebudayaan Pengetahuan Tradisional</p>
+        </div>
+        <div>
           <FontAwesomeIcon icon={faUser} /> Hi, {user?.nama}!
         </div>
       </div>
       <div className={style.content}>
         <div>
-          <p>Manajemen Kebudayaan Pengetahuan Tradisional</p>
+          <Search className={style.searchBox} handleSubmit={_submitSearch} inputProps={inputSearch}/>
         </div>
         <Table
           columnTable={COLUMNS}

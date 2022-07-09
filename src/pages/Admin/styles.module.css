@@ -1,8 +1,7 @@
 .header {
-  text-align: right;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 0.5rem;
 }
 
@@ -10,19 +9,26 @@
   margin-right: 0.5rem;
 }
 
-.header>div:last-child:hover {
-  cursor: pointer;
-}
-
-.content>div:first-child {
+.header>div:first-child {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
 }
 
-.content>div:first-child>p {
+.header>div:first-child>p {
   font-size: 1.5rem;
   font-weight: 700;
+}
+
+.content > div:first-child {
+  margin-bottom: 1rem;
+  width: 20rem;
+  float: right;
+}
+
+.searchBox>form>input {
+  border: 1px solid var(--mid-grey);
+  border-radius: 5px;
+  padding: 0.5rem;
 }
 
 .buttonAdd {
