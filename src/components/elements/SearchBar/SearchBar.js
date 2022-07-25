@@ -15,7 +15,7 @@ export default function SearchBar(props) {
   } = props;
 
   const inputProps = {
-    placeholder: 'Search..',
+    placeholder: 'Cari nama pengetahuan tradisional...',
     onChange: handleInput
   }
 

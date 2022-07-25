@@ -19,3 +19,9 @@
 .buttonSign>span {
   margin-left: 0.5rem;
 }
+
+.multiply {
+  position: fixed;
+  right: 0;
+  display: flex;
+}

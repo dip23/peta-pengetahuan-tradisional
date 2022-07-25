@@ -27,9 +27,9 @@ export default function Maps(props) {
     const totalBudaya = parseInt(data[province.index]?.totalBudaya) + 1;
 
     if (!isNaN(totalBudaya)) {
-      if (totalBudaya >= high) {
+      if (totalBudaya > high) {
         layer.options.fillColor = '#73D737';
-      } else if (totalBudaya <= low) {
+      } else if (totalBudaya < low) {
         layer.options.fillColor = '#FB4141';
       } else {
         layer.options.fillColor = '#E1FB41';

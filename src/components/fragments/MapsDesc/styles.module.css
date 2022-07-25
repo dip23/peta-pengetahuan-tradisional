@@ -16,6 +16,13 @@
   font-weight: 700;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.root > .header > svg {
+  cursor: pointer;
 }
 
 .root > .desc {

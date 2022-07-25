@@ -16,6 +16,7 @@ import Button from '../../components/elements/Button';
 import MapsDesc from '../../components/fragments/MapsDesc/MapsDesc';
 import calculationAPI from '../../api/calculationAPI';
 import { UserContext } from '../../context/UserContext';
+import ModalMultiply from '../../components/fragments/ModalMultiply';
 
 export default function LandingPage() {
   const { user } = useContext(UserContext);
@@ -30,19 +31,22 @@ export default function LandingPage() {
   const [dataProvinsi, setDataProvinsi] = useState([]);
   const [dataBudaya, setDataBudaya] = useState([]);
   const [dataCalc, setDataCalc] = useState({});
+  const [openMultiply, setOpenMultiply] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = async (n) => {
     const res = await provinceAPI.getAllDataProvinces();
     setDataProvinsi(res.data.data);
-    const resCalc = await calculationAPI.getAllCalculate(0.8);
+    const resCalc = await calculationAPI.getAllCalculate(n);
     setDataCalc(resCalc.data.data);
     const resBudaya = await budayaAPI.getAllBudaya();
     setDataBudaya(resBudaya.data.data);
   };
 
+  const multiplyVal = JSON.parse(window.localStorage.getItem('multiply'));
+
   useEffect(() => {
-    fetchData();
-  }, [])
+    fetchData(multiplyVal);
+  }, [multiplyVal])
 
   const handleClickLocation = (id, name) => {
     navigate(routes.LIST_BUDAYA(id), { replace: false });
@@ -84,6 +88,10 @@ export default function LandingPage() {
     }
   }
 
+  const submitMultipy = (e) => {
+    window.localStorage.setItem('multiply', e.target[0].value);
+  }
+
   return (
     <div onClick={() => setOpenResult(false)}>
       <div className={styles.content}>
@@ -103,7 +111,14 @@ export default function LandingPage() {
           {user ? `Hi ${user.nama}!` : 'Sign In'} 
           <span><FontAwesomeIcon icon={faUser} /></span>
         </Button>
-        <MapsDesc high={dataCalc.high} low={dataCalc.low}/>
+        <MapsDesc handleClickSet={()=>setOpenMultiply(true)} high={dataCalc.high} low={dataCalc.low}/>
+        {openMultiply && (
+          <ModalMultiply 
+            show={true}
+            handleSubmit={submitMultipy}
+            onClose={()=>setOpenMultiply(false)}
+          />
+        )}
       </div>
       <Maps
         data={dataProvinsi}

@@ -32,12 +32,14 @@ Text.defaultProps = {
   label: '',
   inputProps: {},
   disabled: false,
-  className: ''
+  className: '',
+  register: ()=>{}
 };
 
 Text.propTypes = {
   label: PropTypes.string,
   inputProps: PropTypes.object,
   disabled: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  register: PropTypes.func
 };

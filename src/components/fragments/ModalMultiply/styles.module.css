@@ -1,0 +1,21 @@
+.root > div{
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.root > div > button {
+  width: 7rem;
+}
+
+.root > div > button:first-child {
+  color: var(--mid-grey);
+  font-weight: 700;
+}
+
+.root > div > button:last-child {
+  color: var(--white);
+  background-color: var(--mid-grey);
+  font-weight: 700;
+}

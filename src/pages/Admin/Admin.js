@@ -59,6 +59,12 @@ export default function Admin() {
   };
 
   useEffect(() => {
+    if(!edit){
+      fetchData();
+    }
+  }, [edit]);
+
+  useEffect(() => {
     setPageData({
       isLoading: true,
       rowData: [],
