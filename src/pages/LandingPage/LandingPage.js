@@ -42,10 +42,10 @@ export default function LandingPage() {
     setDataBudaya(resBudaya.data.data);
   };
 
-  const multiplyVal = JSON.parse(window.localStorage.getItem('multiply'));
+  const multiplyVal = JSON.parse(window.localStorage.getItem('multiply') || 0.8);
 
   useEffect(() => {
-    fetchData(multiplyVal);
+    fetchData(multiplyVal || 0.8);
   }, [multiplyVal])
 
   const handleClickLocation = (id, name) => {
