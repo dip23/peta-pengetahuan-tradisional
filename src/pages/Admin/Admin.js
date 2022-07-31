@@ -153,7 +153,6 @@ export default function Admin() {
 
   const _submitSearch = (e) => {
     e.preventDefault();
-    console.log(e.target[0].value)
     fetchData(e.target[0].value);
   }
 

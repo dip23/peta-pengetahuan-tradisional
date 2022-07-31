@@ -32,8 +32,13 @@ export default function EditBudaya({ data }) {
         setAlert(false);
       }
     } catch (error) {
+      const {status, data} = error.response;
       setLoading(false);
-      setMessage(error.response.data.message)
+      if(status === 500){
+        setMessage('File gambar terlalu besar');
+      }else{
+        setMessage(data.message);
+      }
       setAlert(true);
     }
   };
